@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
+import { Image } from 'astro:assets';
 
+import poring from 'src/assets/poring.png';
 const games = [
   { name: "test", type: "RPG", platform: "PC" },
   { name: "test1", type: "SLG", platform: "Mobile" },
@@ -43,7 +45,7 @@ const games = [
           {games.map((game) => (
             <article class="card">
               <div class="card-cover">
-                <img src="../assert/poring.png" alt={game.name} />
+                <img src={poring} alt={game.name} />
               </div>
               <div class="card-body">
                 <h2 class="card-title">{game.name}</h2>
