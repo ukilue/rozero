@@ -1,0 +1,18 @@
+---
+const { name, type, effect, image } = Astro.props;
+---
+<div class="bg-white border-2 border-[#D1D5DB] rounded-xl overflow-hidden shadow-sm hover:border-[#8DB6D2] transition">
+	<div class="bg-[#E5E7EB] h-48 flex items-center justify-center text-4xl italic text-gray-400">
+		{/* 這裡可以放卡片插圖 */}
+		[ Card Image ]
+	</div>
+	<div class="p-4 border-t-2 border-[#D1D5DB]">
+		<div class="flex justify-between items-start mb-2">
+			<h3 class="font-bold text-lg">{name}</h3>
+			<span class="text-xs bg-[#8DB6D2] text-white px-2 py-1 rounded-full">{type}</span>
+		</div>
+		<p class="text-sm text-gray-600 leading-relaxed italic">
+			{effect}
+		</p>
+	</div>
+</div>

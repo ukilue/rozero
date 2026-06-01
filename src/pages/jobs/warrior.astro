@@ -1,0 +1,169 @@
+---
+import "../../styles/global.css";
+
+const job = {
+  name: "戰士",
+  role: "近戰 / 坦克 / 輸出",
+  difficulty: "普通",
+  weapon: "雙手劍、盾牌",
+  desc: "戰士擁有穩定的近戰輸出與良好的生存能力，適合新手入門，也能在高難度關卡中擔任前排核心。",
+  traits: [
+    "高生存能力，適合站前排承傷",
+    "技能操作直觀，容易上手",
+    "具備單體爆發與範圍清怪能力",
+    "可依裝備與天賦切換坦克或輸出流派"
+  ],
+  skills: [
+    {
+      name: "裂地斬",
+      text: "向前方揮出重擊，對範圍內敵人造成物理傷害，並有機率附加短暫擊退效果。"
+    },
+    {
+      name: "鋼鐵防禦",
+      text: "短時間內提升防禦與減傷效果，適合在首領高傷技能前開啟。"
+    },
+    {
+      name: "戰吼",
+      text: "提升自身與周圍隊友的攻擊能力，並增加仇恨值，適合開戰或拉怪時使用。"
+    },
+    {
+      name: "終結重擊",
+      text: "對生命值較低的敵人造成高額傷害，常作為連招收尾技能。"
+    }
+  ],
+  build: [
+    ["定位", "前排坦克 / 穩定輸出"],
+    ["主要屬性", "力量、體力、暴擊"],
+    ["推薦新手", "是"],
+    ["操作難度", "中低"],
+    ["隊伍功能", "承傷、開怪、穩定近戰輸出"]
+  ]
+};
+---
+
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{job.name}｜職業資料</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <div class="logo">GameData</div>
+        <nav class="nav">
+          <a href="/">首頁</a>
+          <a href="/jobs" class="active">職業</a>
+          <a href="/characters">角色</a>
+          <a href="/equipment">裝備</a>
+          <a href="/guides">攻略</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-box">
+          <div class="breadcrumb">
+            <span>首頁</span>
+            <span>/</span>
+            <span>職業</span>
+            <span>/</span>
+            <span>{job.name}</span>
+          </div>
+          <h1 class="hero-title">{job.name}</h1>
+          <p class="hero-desc">{job.desc}</p>
+
+          <div class="meta-row">
+            <span class="tag">{job.role}</span>
+            <span class="tag success">武器：{job.weapon}</span>
+            <span class="tag warning">難度：{job.difficulty}</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="page">
+        <aside class="sidebar">
+          <h2 class="side-title">職業導覽</h2>
+          <nav class="side-nav">
+            <a href="#overview" class="active">職業概述</a>
+            <a href="#traits">核心特色</a>
+            <a href="#skills">技能介紹</a>
+            <a href="#build">培養方向</a>
+            <a href="#tips">實戰建議</a>
+          </nav>
+        </aside>
+
+        <article class="content-panel">
+          <h1 class="page-title" id="overview">{job.name} 職業資料</h1>
+          <p class="page-subtitle">
+            適合作為站內職業介紹頁，方便玩家快速了解定位、技能、培養方向與玩法重點。
+          </p>
+
+          <div class="notice">
+            此頁面為職業內頁範本，可複製後改成法師、弓手、刺客、牧師等其他職業。
+          </div>
+
+          <h2 id="traits">核心特色</h2>
+          <ul>
+            {job.traits.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+
+          <h2 id="skills">技能介紹</h2>
+          <div class="skill-list">
+            {job.skills.map((skill) => (
+              <section class="skill-item">
+                <h3 class="skill-name">{skill.name}</h3>
+                <p class="skill-text">{skill.text}</p>
+              </section>
+            ))}
+          </div>
+
+          <h2 id="build">培養方向</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  <th>內容</th>
+                </tr>
+              </thead>
+              <tbody>
+                {job.build.map(([key, value]) => (
+                  <tr>
+                    <td>{key}</td>
+                    <td>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="tips">實戰建議</h2>
+          <p>
+            戰士在隊伍中通常負責站在最前線，因此裝備與技能配置可優先考慮生存與穩定輸出。如果是新手拓荒，
+            建議先以防禦與體力為核心，等熟悉副本機制後，再逐步轉向高傷害配置。
+          </p>
+          <p>
+            若面對大量小怪，建議先用群攻技能建立仇恨，再銜接減傷技能與戰吼效果；若是單體首領戰，
+            則應保留爆發技能在破防或虛弱階段使用，以提高整體輸出效率。
+          </p>
+
+          <div class="meta-row">
+            <a class="btn btn-primary" href="/jobs">返回職業列表</a>
+            <a class="btn btn-secondary" href="/">回首頁</a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer-inner">
+        <div>© 2026 GameData</div>
+        <div>職業資料內頁範本</div>
+      </div>
+    </footer>
+  </body>
+</html>

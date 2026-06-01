@@ -1,0 +1,40 @@
+---
+const { title } = Astro.props;
+import '../styles/global.css';
+---
+
+<html lang="zh-TW">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title} | RO 萌萌資料站</title>
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-[#F9FBFD] text-[#5A4A42] font-['Quicksand',_sans-serif]">
+		<nav class="bg-white/80 backdrop-blur-md border-b-4 border-[#8DB6D2] sticky top-0 z-50">
+			<div class="max-w-6xl mx-auto px-4">
+				<div class="flex justify-between items-center h-20">
+					<div class="flex items-center gap-2">
+						<div class="w-10 h-10 bg-[#8DB6D2] rounded-full flex items-center justify-center text-white text-2xl">🐾</div>
+						<span class="text-2xl font-bold text-[#8DB6D2]">RO-Wiki</span>
+					</div>
+					<ul class="flex gap-6 font-bold text-lg">
+						<li><a href="/" class="hover:text-[#8DB6D2] transition">首頁</a></li>
+						<li><a href="/jobs" class="hover:text-[#8DB6D2] transition">職業</a></li>
+						<li><a href="/weapons" class="hover:text-[#8DB6D2] transition">武器</a></li>
+						<li><a href="/cards" class="hover:text-[#8DB6D2] transition">卡片</a></li>
+						<li><a href="/enchant" class="hover:text-[#8DB6D2] transition">附魔</a></li>
+						<li><a href="/systems" class="hover:text-[#8DB6D2] transition">系統</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<main class="max-w-6xl mx-auto px-4 py-8">
+			<slot />
+		</main>
+
+		<footer class="text-center py-10 text-gray-400">
+			<p>© 2023 RO Cute Database. Made with ❤️ and Astro.</p>
+		</footer>
+	</body>
+</html>

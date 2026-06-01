@@ -1,0 +1,80 @@
+---
+import "../styles/global.css";
+
+const games = [
+  { name: "幻境戰記", type: "RPG", platform: "PC" },
+  { name: "星域遠征", type: "SLG", platform: "Mobile" },
+  { name: "機甲戰線", type: "ACT", platform: "PC / Console" },
+];
+---
+
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>RO樂園</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <div class="logo">GameData</div>
+        <nav class="nav">
+          <a href="#">首頁</a>
+          <a href="jobs/warrior">職業</a>
+          <a href="#">角色</a>
+          <a href="#">裝備</a>
+          <a href="#">攻略</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-box">
+          <h1 class="hero-title">RO Zero</h1>
+          <p class="hero-desc">
+            收錄遊戲資訊、角色數值、裝備效果與攻略內容，簡潔清楚，方便快速查找。
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="toolbar">
+          <input class="input" type="text" placeholder="搜尋遊戲、角色、裝備..." />
+          <select class="select">
+            <option>全部類型</option>
+            <option>RPG</option>
+            <option>ACT</option>
+            <option>SLG</option>
+          </select>
+          <button class="btn btn-primary">搜尋</button>
+        </div>
+
+        <div class="grid grid-3">
+          {games.map((game) => (
+            <article class="card">
+              <div class="card-cover">
+                <img src="https://via.placeholder.com/800x450" alt={game.name} />
+              </div>
+              <div class="card-body">
+                <h2 class="card-title">{game.name}</h2>
+                <p class="card-desc">這裡可以放遊戲介紹、特色與更新重點摘要。</p>
+                <div class="card-meta">
+                  <span class="tag">{game.type}</span>
+                  <span class="tag success">{game.platform}</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer-inner">
+        <div>© 2026 GameData</div>
+        <div>簡約遊戲資料站樣板</div>
+      </div>
+    </footer>
+  </body>
+</html>
