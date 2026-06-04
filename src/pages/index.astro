@@ -1,34 +1,56 @@
 ---
 import BaseLayout from '../layouts/baseLayout.astro';
-import { Image } from 'astro:assets';
-
-import poring from '../asserts/poring.png';
-const games = [
-  { name: "test", type: "RPG", platform: "PC" },
-  { name: "test1", type: "SLG", platform: "Mobile" },
-  { name: "test2", type: "ACT", platform: "PC / Console" },
+const announcements = [
+  {
+    date: "2025-06-04",
+    label: "今日",
+    entries: [
+      { title: "【系統維護】6/5 凌晨 02:00–04:00 例行維護公告", category: "系統" },
+      { title: "【活動上線】夏日祭典限時活動正式開跑！", category: "活動" },
+      { title: "【修正】修復部分玩家無法進入第三章地圖的問題", category: "修正" },
+    ],
+  },
+  {
+    date: "2025-06-03",
+    label: "昨日",
+    entries: [
+      { title: "【版本更新】v2.4.1 更新內容說明", category: "更新" },
+      { title: "【活動預告】夏日祭典將於明日開放，請提前備妥材料", category: "活動" },
+    ],
+  },
+  {
+    date: "2025-06-01",
+    label: "06/01",
+    entries: [
+      { title: "【公告】6月份每日登入獎勵調整說明", category: "公告" },
+      { title: "【修正】修復商城購買後道具未入帳的異常", category: "修正" },
+      { title: "【系統】好友系統功能優化上線", category: "系統" },
+    ],
+  },
 ];
 ---
 <BaseLayout>
-    <main class="container">
-      <section class="section">
-        <div class="grid grid-3">
-          {games.map((game) => (
-            <article class="card">
-              <div class="card-cover">
-                <img src={poring.src} alt={game.name} />
-              </div>
-              <div class="card-body">
-                <h2 class="card-title">{game.name}</h2>
-                <p class="card-desc">這裡可以放遊戲介紹、特色與更新重點摘要。</p>
-                <div class="card-meta">
-                  <span class="tag">{game.type}</span>
-                  <span class="tag success">{game.platform}</span>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </main>
+  <main class="container">
+    <section class="section">
+      <h1 class="page-title">站內公告</h1>
+      <div class="announcement-list">
+        {announcements.map((day) => (
+          <div class="day-block">
+            <div class="day-header">
+              <span class="day-label">{day.label}</span>
+              <span class="day-date">{day.date}</span>
+            </div>
+            <ul class="entry-list">
+              {day.entries.map((entry) => (
+                <li class="entry-item">
+                  <span class={`category-tag category-${entry.category}`}>{entry.category}</span>
+                  <span class="entry-title">{entry.title}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
 </BaseLayout>
