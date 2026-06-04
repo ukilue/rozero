@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/baseLayout.astro';
 const announcements = [
   {
     date: "2025-06-04",
-    label: "今日",
+    label: "今日公告",
     entries: [
       { title: "【系統維護】6/5 凌晨 02:00–04:00 例行維護公告", category: "系統" },
       { title: "【活動上線】夏日祭典限時活動正式開跑！", category: "活動" },
@@ -12,7 +12,7 @@ const announcements = [
   },
   {
     date: "2025-06-03",
-    label: "昨日",
+    label: "昨日公告",
     entries: [
       { title: "【版本更新】v2.4.1 更新內容說明", category: "更新" },
       { title: "【活動預告】夏日祭典將於明日開放，請提前備妥材料", category: "活動" },
@@ -20,7 +20,7 @@ const announcements = [
   },
   {
     date: "2025-06-01",
-    label: "06/01",
+    label: "06/01 公告",
     entries: [
       { title: "【公告】6月份每日登入獎勵調整說明", category: "公告" },
       { title: "【修正】修復商城購買後道具未入帳的異常", category: "修正" },
@@ -32,23 +32,26 @@ const announcements = [
 <BaseLayout>
   <main class="container">
     <section class="section">
-      <h1 class="page-title">站內公告</h1>
-      <div class="announcement-list">
+      <div class="grid grid-3">
         {announcements.map((day) => (
-          <div class="day-block">
-            <div class="day-header">
-              <span class="day-label">{day.label}</span>
-              <span class="day-date">{day.date}</span>
+          <article class="card">
+            <div class="card-body">
+              <div class="card-meta" style="margin-bottom: 0.5rem;">
+                <span class="tag">{day.label}</span>
+                <span class="tag">{day.date}</span>
+              </div>
+              <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+                {day.entries.map((entry) => (
+                  <li style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                    <span class={`tag ${entry.category === '修正' ? 'danger' : entry.category === '活動' ? 'success' : ''}`} style="flex-shrink: 0; font-size: 0.7rem;">
+                      {entry.category}
+                    </span>
+                    <span style="font-size: 0.875rem; line-height: 1.4;">{entry.title}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul class="entry-list">
-              {day.entries.map((entry) => (
-                <li class="entry-item">
-                  <span class={`category-tag category-${entry.category}`}>{entry.category}</span>
-                  <span class="entry-title">{entry.title}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </article>
         ))}
       </div>
     </section>
