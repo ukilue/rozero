@@ -1,5 +1,5 @@
 ---
-import "../styles/global.css";
+import BaseLayout from '../layouts/baseLayout.astro';
 import { Image } from 'astro:assets';
 
 import poring from '../asserts/poring.png';
@@ -9,37 +9,7 @@ const games = [
   { name: "test2", type: "ACT", platform: "PC / Console" },
 ];
 ---
-
-<html lang="zh-Hant">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>RO樂園</title>
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container site-header-inner">
-        <div class="logo">GameData</div>
-        <nav class="nav">
-          <a href="#">首頁</a>
-          <a href="jobs/warrior">職業</a>
-          <a href="#">角色</a>
-          <a href="#">裝備</a>
-          <a href="#">攻略</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
-      <section class="hero">
-        <div class="hero-box">
-          <h1 class="hero-title">RO Zero</h1>
-          <p class="hero-desc">
-            收錄遊戲資訊、角色數值、裝備效果與攻略內容，簡潔清楚，方便快速查找。
-          </p>
-        </div>
-      </section>
-
+<BaseLayout>
       <section class="section">
         <div class="grid grid-3">
           {games.map((game) => (
@@ -59,13 +29,4 @@ const games = [
           ))}
         </div>
       </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container site-footer-inner">
-        <div>© 2026 GameData</div>
-        <div>簡約遊戲資料站樣板</div>
-      </div>
-    </footer>
-  </body>
-</html>
+</BaseLayout>
