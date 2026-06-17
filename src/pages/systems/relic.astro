@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../../layouts/baseLayout.astro';
+
+const relics = [
+  {
+    id: "wing",
+    name: "聖物-時隙之翼",
+    tag: "背部聖物",
+    released: "2025/10",
+    desc: "蘊含時間裂縫力量的神秘翅翼，據說穿戴者能感受到時間流動的軌跡。由特定魔物的特殊掉落材料合成製成，是最早實裝的聖物之一。",
+    materials: [
+      { name: "時隙羽翼碎片", source: "特定魔物特殊掉落", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+      { name: "時隙結晶", source: "特定魔物特殊掉落", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+      { name: "時空之砂", source: "特定魔物特殊掉落", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+    ],
+    notice: "詳細製作材料及所需數量請以官方公告與遊戲內 NPC 說明為準。",
+    officialLink: "https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217890",
+  },
+  {
+    id: "core",
+    name: "聖物-霜焰之核",
+    tag: "中部聖物",
+    released: "2026 年初",
+    desc: "同時蘊含冰霜與烈焰能量的神秘核心，兩種截然相反的力量在其中達到奇妙的平衡。製作材料來自不同屬性的特殊魔物，收集難度較高。",
+    materials: [
+      { name: "霜焰精粹", source: "特定魔物特殊掉落", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+      { name: "冰炎結晶", source: "特定魔物特殊掉落", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+      { name: "雙屬之核", source: "特定魔物特殊掉落", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+    ],
+    notice: "詳細製作材料及所需數量請以官方公告與遊戲內 NPC 說明為準。",
+    officialLink: "https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217890",
+  },
+  {
+    id: "flame",
+    name: "聖物-淵冰之炎",
+    tag: "下部聖物",
+    released: "2026/05/19",
+    desc: "從深淵冰封中誕生的黑色火焰聖物，帶著一股令人窒息的寒冷溫度卻又隱隱散發熱能。伴隨忍者職業改版同步實裝，為三大聖物中最新問世者。",
+    materials: [
+      { name: "淵冰火焰碎片", source: "特定魔物特殊掉落 (含3F破碎)", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+      { name: "深淵之焰", source: "特定魔物特殊掉落", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+      { name: "冰封熔岩石", source: "特定魔物特殊掉落", note: "可存倉，不可交易、不可丟棄、不可放手推車" },
+    ],
+    notice: "詳細製作材料及所需數量請以官方公告與遊戲內 NPC 說明為準。",
+    officialLink: "https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217890",
+  },
+];
+
+const relicRules = [
+  "製作材料可以存入倉庫，但不可交易、不可丟棄、不可放入手推車。",
+  "完成的聖物成品不可交易，也不可存入倉庫，僅能裝備於當前角色。",
+  "製作材料由特定魔物以「特殊掉落」方式獲得，與一般掉落機制不同。",
+  "若想在其他角色使用聖物，需透過「聖物倉庫轉移」系統（聖物封盡）進行跨角色轉移。",
+];
+---
+
+<BaseLayout>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-box">
+        <div class="breadcrumb">
+          <span>首頁</span>
+          <span>/</span>
+          <span>系統介紹</span>
+          <span>/</span>
+          <span>聖物系統</span>
+        </div>
+        <h1 class="hero-title">聖物系統</h1>
+        <p class="hero-desc">
+          聖物是《RO 仙境傳說 Online：樂園》中的特殊裝備，需透過收集特定魔物的稀有掉落材料後進行合成。
+          聖物具有獨特的流通限制，製作完成後僅能由合成該角色使用。
+        </p>
+        <div class="meta-row">
+          <span class="tag">特殊合成裝備</span>
+          <span class="tag warning">成品不可交易・不可存倉</span>
+          <span class="tag success">材料可存倉</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <aside class="sidebar">
+        <h2 class="side-title">聖物導覽</h2>
+        <nav class="side-nav">
+          <a href="#overview" class="active">系統說明</a>
+          <a href="#wing">時隙之翼</a>
+          <a href="#core">霜焰之核</a>
+          <a href="#flame">淵冰之炎</a>
+          <a href="#storage">聖物倉庫轉移</a>
+        </nav>
+      </aside>
+
+      <article class="content-panel">
+        <h1 class="page-title" id="overview">聖物系統說明</h1>
+        <p class="page-subtitle">
+          聖物為角色綁定的稀有裝備，材料來自特定魔物的特殊掉落，並在指定 NPC 處進行合成。
+        </p>
+
+        <div class="notice">
+           本頁面依據官方公告整理。部分製作材料名稱為社群慣用稱呼，詳細內容請以
+          <a href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217890" target="_blank" rel="noopener">官方公告</a>
+          及遊戲內說明為準。
+        </div>
+
+        <h2>系統注意事項</h2>
+        <ul>
+          {relicRules.map((rule) => (
+            <li>{rule}</li>
+          ))}
+        </ul>
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        {relics.map((relic) => (
+          <section id={relic.id} style="margin-bottom: 2.5rem;">
+            <h2>{relic.name}</h2>
+
+            <div class="meta-row" style="margin-bottom: 1rem;">
+              <span class="tag">{relic.tag}</span>
+              <span class="tag success">實裝時間：{relic.released}</span>
+            </div>
+
+            <p>{relic.desc}</p>
+
+            <h3 style="margin-top: 1.5rem;">製作材料</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>材料名稱</th>
+                    <th>取得方式</th>
+                    <th>流通限制</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {relic.materials.map((mat) => (
+                    <tr>
+                      <td><strong>{mat.name}</strong></td>
+                      <td>{mat.source}</td>
+                      <td><span style="color: #b45309; font-size: 0.85em;">{mat.note}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="notice" style="margin-top: 1rem; background: #fefce8; border-left-color: #ca8a04;">
+              ⚠️ {relic.notice}
+              <a href={relic.officialLink} target="_blank" rel="noopener">→ 查看官方公告</a>
+            </div>
+          </section>
+        ))}
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        <section id="storage">
+          <h2>聖物倉庫轉移 — 聖物封盡</h2>
+
+          <div class="meta-row" style="margin-bottom: 1rem;">
+            <span class="tag">帳號內轉移功能</span>
+            <span class="tag warning">道具類</span>
+          </div>
+
+          <p>
+            由於聖物成品完成後即綁定當前角色，無法存入倉庫或進行交易，
+            若玩家希望將已裝備的聖物移轉至同帳號下的其他角色，可透過「<strong>聖物封盡</strong>」道具來完成聖物倉庫轉移。
+          </p>
+
+          <h3 style="margin-top: 1.5rem;">功能說明</h3>
+          <div class="skill-list">
+            <section class="skill-item">
+              <h3 class="skill-name">聖物封盡</h3>
+              <p class="skill-text">
+                使用後可將指定的聖物從當前角色身上封存，並透過帳號共用倉庫轉移至同帳號的其他角色。
+                此功能讓玩家在努力製作聖物後，不受限於單一角色，可於帳號內彈性調配使用。
+              </p>
+            </section>
+          </div>
+
+          <h3 style="margin-top: 1.5rem;">使用注意事項</h3>
+          <ul>
+            <li>「聖物封盡」道具使用對象為已合成完成的聖物，未合成的材料無法使用本道具。</li>
+            <li>轉移後的聖物僅能在同帳號內的角色之間移動，不可跨帳號或進行交易。</li>
+            <li>轉移操作完成後，聖物狀態將重新綁定至接收角色，無法再次轉移除非再次使用「聖物封盡」。</li>
+            <li>建議在轉移前確認目標角色的裝備需求與配置，避免資源浪費。</li>
+          </ul>
+
+          <div class="notice" style="margin-top: 1rem;">
+             「聖物封盡」的取得方式與詳細使用條件請參考
+            <a href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217890" target="_blank" rel="noopener">官方公告</a>。
+          </div>
+        </section>
+
+        <div class="meta-row" style="margin-top: 2.5rem;">
+          <a class="btn btn-primary" href="/">回首頁</a>
+          <a class="btn btn-secondary" href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217890" target="_blank" rel="noopener">查看官方公告</a>
+        </div>
+      </article>
+    </section>
+  </main>
+</BaseLayout>
