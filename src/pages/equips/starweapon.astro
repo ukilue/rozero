@@ -1,0 +1,319 @@
+---
+import BaseLayout from '../../layouts/baseLayout.astro';
+
+const starWeapons = [
+  {
+    id: "chain-hammer",
+    name: "★鏈錘[3]",
+    tag: "鈍器・雙手",
+    jobClass: "鐵匠・武僧",
+    desc: "由普通鏈錘[3]活化而成的強化武器，蘊含特殊鑄造之力。攻速大幅提升，是鐵匠與彈指武僧的頂級武器選擇，社群評價最高。",
+    baseItem: "鏈錘[3]",
+    stats: [
+      { label: "ATK", value: "魔物掉落詞條 ×1.2倍（物理攻擊接近 ×2倍）" },
+      { label: "卡片槽", value: "3槽（保留原卡片）" },
+      { label: "附加效果", value: "攻速大幅提升（+25% 工作速度）" },
+      { label: "副作用", value: "可接受範圍，建議補強防禦裝備" },
+    ],
+    note: "目前社群評為活化武器中 C/P 值最高的選項，鐵匠與彈指武僧皆適用。",
+  },
+  {
+    id: "dagger",
+    name: "★雙刃短劍[3]",
+    tag: "短劍・單手",
+    jobClass: "流氓・刺客",
+    desc: "由雙刃短劍[3]活化而成，對爆擊系盜賊職業有額外加成。然而-FLEE 副作用對以閃避為主的流氓影響較大，需謹慎評估。",
+    baseItem: "雙刃短劍[3]",
+    stats: [
+      { label: "ATK / CRI", value: "物理攻擊與爆擊率提升" },
+      { label: "卡片槽", value: "3槽（保留原卡片）" },
+      { label: "附加效果", value: "爆擊傷害加成" },
+      { label: "副作用", value: "FLEE -50（對閃避流玩法影響極大）" },
+    ],
+    note: "副作用幅度較大，雙刀爆擊流建議評估整體配裝再決定是否製作。",
+  },
+  {
+    id: "crossbow",
+    name: "★十字弓[3]",
+    tag: "遠距武器・弓",
+    jobClass: "獵人・鳥獵",
+    desc: "由十字弓[3]活化而成，遠距輸出顯著提升，強度優於一般角弓。主要掉落來源為卡拉蟹，因分布地圖廣大，取得難度相對偏高。",
+    baseItem: "十字弓[3]",
+    stats: [
+      { label: "ATK", value: "顯著提升，強於同等級角弓" },
+      { label: "卡片槽", value: "3槽（保留原卡片）" },
+      { label: "附加效果", value: "遠距攻擊傷害加成" },
+      { label: "副作用", value: "中等，職業本身設計仍是主要限制因素" },
+    ],
+    note: "十字弓主要由卡拉蟹掉落，由於地圖廣大，收集效率較低，建議耐心累積。",
+  },
+  {
+    id: "artes-sword",
+    name: "★亞爾特劍[3]",
+    tag: "單手劍",
+    jobClass: "騎士・槍騎",
+    desc: "由亞爾特劍[3]活化而成，命中提升對某些副本環境有一定幫助。目前槍騎仍為主流，本武器可視為對騎士系職業的補強選項。",
+    baseItem: "亞爾特劍[3]",
+    stats: [
+      { label: "ATK / HIT", value: "物理攻擊與命中同步提升" },
+      { label: "卡片槽", value: "3槽（保留原卡片）" },
+      { label: "附加效果", value: "命中強化，適合對付高迴避魔物" },
+      { label: "副作用", value: "可接受範圍" },
+    ],
+    note: "現階段槍騎職業仍是主流，本武器適合有特定需求（如命中不足）的騎士玩家。",
+  },
+  {
+    id: "steel-axe",
+    name: "★鋼斧[3]",
+    tag: "雙手斧",
+    jobClass: "鐵匠・黑鐵匠",
+    desc: "由鋼斧[3]活化而成的雙手斧武器。整體強度與鏈錘相近，但攻速略慢，加上 ASPD 限制，在樂園版本中實用性稍遜一籌。",
+    baseItem: "鋼斧[3]",
+    stats: [
+      { label: "ATK", value: "高物理攻擊" },
+      { label: "卡片槽", value: "3槽（保留原卡片）" },
+      { label: "附加效果", value: "重擊系技能加成" },
+      { label: "副作用", value: "ASPD -15（攻速下降明顯）" },
+    ],
+    note: "強度尚可但攻速副作用偏大，建議先評估職業技能流派後再決定是否製作。",
+  },
+  {
+    id: "oak-staff",
+    name: "★橡木魔杖[3]",
+    tag: "雙手杖・法器",
+    jobClass: "法師・巫師・賢者",
+    desc: "由橡木魔杖[3]活化而成，MATK 顯著提升，比同等言靈魔杖高出 30 MATK。適合手動操作的法系職業；由於 SP 消耗增加，全自動掛機效果有限。",
+    baseItem: "橡木魔杖[3]",
+    stats: [
+      { label: "MATK", value: "魔法攻擊大幅提升（+30 MATK vs 言靈）" },
+      { label: "卡片槽", value: "3槽（保留原卡片）" },
+      { label: "附加效果", value: "魔法詞條約魔物掉落版 ×2倍" },
+      { label: "副作用", value: "SP 消耗增加（影響長時間掛機）" },
+    ],
+    note: "適合手動操作法系玩家。若以內掛長時間掛機，SP 消耗增加將影響續航力，需評估永動 SP 配裝。",
+  },
+];
+
+const craftSteps = [
+  {
+    step: 1,
+    title: "收集目標武器 × 100 把",
+    desc: "在遊戲中打怪取得指定武器（如鏈錘[3]）共 100 把，須為魔物掉落品，商店購買的武器不符資格，且需為同一種類武器。",
+    icon: "⚔️",
+  },
+  {
+    step: 2,
+    title: "兌換鑄造硬幣",
+    desc: "攜帶 100 把武器前往普隆德拉右上角的「紀念幣 NPC」，換取 100 枚鑄造硬幣（★鑄造之證）。",
+    icon: "",
+  },
+  {
+    step: 3,
+    title: "取得哥布林碎幣 × 8",
+    desc: "透過消耗 Zeny（18 萬～40 萬隨機）換取哥布林碎幣，每次獲得 1～3 個（隨機）。亦可透過哥布林銅幣（1:1）或哥布林銀幣（1:10）兌換。約需花費 150 萬 Zeny 或等值儲值點。",
+    icon: "",
+  },
+  {
+    step: 4,
+    title: "於活化工坊合成 ★武器",
+    desc: "攜帶一把 +7 精煉的目標武器 + 100 枚★鑄造之證 + 8 個哥布林碎幣，前往「活化工坊 NPC」（位於紀念幣 NPC 下方一格）進行合成。合成後精煉值歸零（+7 → +0），原有卡片與附魔保留。",
+    icon: "",
+  },
+  {
+    step: 5,
+    title: "精煉與附魔強化（選擇性）",
+    desc: "取得 +0 ★武器後可直接使用，或進一步精煉至 +9 以發揮最大強度，再搭配附魔道具進行附魔強化。★武器附魔強度約為一般魔物掉落武器的 1.2 倍（ATK/MATK 接近 2 倍）。",
+    icon: "✨",
+  },
+];
+
+const enchantInfo = {
+  items: [
+    { name: "物理魔晶石", source: "100 個蒼蠅翅膀 + 1 個充滿雜質的石頭 → 3選1（物/法附魔道具/雜質）" },
+    { name: "魔法魔晶石", source: "同上，三選一隨機取得" },
+    { name: "充滿雜質的石頭", source: "PVP 地圖打「流浪的糕餅」魔物掉落（稀有，一小時取得量有限）" },
+  ],
+};
+
+const rulesInfo = [
+  "★武器可交易，製作完成後可於玩家間自由買賣。",
+  "合成時精煉值歸零（原 +7 回到 +0），但卡片與附魔效果完整保留。",
+  "收集武器須為魔物實際掉落品，商店購買的武器不符合活化資格。",
+  "同名武器才能兌換，不可混用不同種類武器湊 100 把。",
+  "★武器附魔強度約為一般掉落武器的 1.2 倍，物理/魔法攻擊詞條接近 2 倍。",
+  "目前開放活化的武器種類：鏈錘[3]、雙刃短劍[3]、十字弓[3]、亞爾特劍[3]、鋼斧[3]、橡木魔杖[3]，後續可能持續新增。",
+];
+---
+
+<BaseLayout>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-box">
+        <div class="breadcrumb">
+          <span>首頁</span>
+          <span>/</span>
+          <span>裝備系統</span>
+          <span>/</span>
+          <span>★武（活化武器）</span>
+        </div>
+        <h1 class="hero-title">★武（活化武器系統）</h1>
+        <p class="hero-desc">
+          ★武（星級武器）是《RO 仙境傳說 Online:樂園》中透過「武器活化」機制取得的強化武器。
+          玩家需收集大量同種魔物掉落武器，在指定 NPC 合成後獲得帶有★標記的強化版本，
+          附魔強度顯著高於普通掉落武器，且合成後可自由交易。
+        </p>
+        <div class="meta-row">
+          <span class="tag">武器活化系統</span>
+          <span class="tag success">成品可交易</span>
+          <span class="tag warning">合成後精煉歸零</span>
+          <span class="tag">卡片・附魔保留</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <aside class="sidebar">
+        <h2 class="side-title">★武導覽</h2>
+        <nav class="side-nav">
+          <a href="#overview" class="active">系統說明</a>
+          <a href="#craft">合成流程</a>
+          <a href="#chain-hammer">★鏈錘[3]</a>
+          <a href="#dagger">★雙刃短劍[3]</a>
+          <a href="#crossbow">★十字弓[3]</a>
+          <a href="#artes-sword">★亞爾特劍[3]</a>
+          <a href="#steel-axe">★鋼斧[3]</a>
+          <a href="#oak-staff">★橡木魔杖[3]</a>
+          <a href="#enchant">附魔道具</a>
+        </nav>
+      </aside>
+
+      <article class="content-panel">
+        <h1 class="page-title" id="overview">★武（活化武器）系統說明</h1>
+        <p class="page-subtitle">
+          武器活化是樂園版本的特色強化機制，透過大量同種武器的累積，將普通武器昇華為★星級武器。
+        </p>
+
+        <div class="notice">
+           本頁面依據官方公告及社群攻略整理。詳細數值、NPC 位置及合成條件請以
+          <a href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217788" target="_blank" rel="noopener">官方公告</a>
+          及遊戲內說明為準。
+        </div>
+
+        <h2>系統注意事項</h2>
+        <ul>
+          {rulesInfo.map((rule) => (
+            <li>{rule}</li>
+          ))}
+        </ul>
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        <!-- 合成流程 -->
+        <section id="craft" style="margin-bottom: 2.5rem;">
+          <h2>合成流程</h2>
+          <p>製作一把★武器需要經歷以下步驟，合成前請確認已備好所有材料：</p>
+          <div class="skill-list">
+            {craftSteps.map((s) => (
+              <section class="skill-item">
+                <h3 class="skill-name">
+                  <span style="margin-right: 0.5rem;">{s.icon}</span>
+                  步驟 {s.step}：{s.title}
+                </h3>
+                <p class="skill-text">{s.desc}</p>
+              </section>
+            ))}
+          </div>
+
+          <div class="notice" style="margin-top: 1.5rem; background: #fefce8; border-left-color: #ca8a04;">
+            ⚠️ 合成所需 Zeny 試算（以製作一把 +9 ★武器為例）：<br />
+            普通武器 × ~7,488 把・哥布林碎幣 × 576 個・強化金屬-級數二 × 2,520 個・高濃縮神之金屬 × 24 個，總花費估計約 <strong>9,000 萬 Zeny 以上</strong>，實際數值因精煉運氣而異。
+          </div>
+        </section>
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        <!-- 各武器介紹 -->
+        {starWeapons.map((weapon) => (
+          <section id={weapon.id} style="margin-bottom: 2.5rem;">
+            <h2>{weapon.name}</h2>
+            <div class="meta-row" style="margin-bottom: 1rem;">
+              <span class="tag">{weapon.tag}</span>
+              <span class="tag success">適用職業：{weapon.jobClass}</span>
+            </div>
+            <p>{weapon.desc}</p>
+            <h3 style="margin-top: 1.5rem;">能力一覽</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>能力項目</th>
+                    <th>說明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>合成材料</strong></td>
+                    <td>{weapon.baseItem} × 100 把 + ★鑄造之證 × 100 + 哥布林碎幣 × 8</td>
+                  </tr>
+                  {weapon.stats.map((stat) => (
+                    <tr>
+                      <td><strong>{stat.label}</strong></td>
+                      <td>{stat.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div class="notice" style="margin-top: 1rem; background: #fefce8; border-left-color: #ca8a04;">
+               {weapon.note}
+            </div>
+          </section>
+        ))}
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        <!-- 附魔道具 -->
+        <section id="enchant" style="margin-bottom: 2.5rem;">
+          <h2>附魔強化</h2>
+          <div class="meta-row" style="margin-bottom: 1rem;">
+            <span class="tag">可重複附魔</span>
+            <span class="tag success">附魔強度約 ×1.2 倍</span>
+          </div>
+          <p>
+            取得★武器後，可透過專屬附魔道具進一步強化武器詞條。★武器的附魔強度約為一般魔物掉落武器的 <strong>1.2 倍</strong>，
+            物理／魔法攻擊類詞條效果接近 <strong>2 倍</strong>，是追求高輸出的重要步驟。
+          </p>
+          <h3 style="margin-top: 1.5rem;">附魔材料取得</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>道具名稱</th>
+                  <th>取得方式</th>
+                </tr>
+              </thead>
+              <tbody>
+                {enchantInfo.items.map((item) => (
+                  <tr>
+                    <td><strong>{item.name}</strong></td>
+                    <td style="font-size: 0.92em;">{item.source}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="notice" style="margin-top: 1rem;">
+             「充滿雜質的石頭」掉落自 PVP 地圖的「流浪的糕餅」魔物，每小時取得量有限，建議長期穩定累積。
+            附魔道具相關的詳細數值請參考
+            <a href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217788" target="_blank" rel="noopener">官方公告</a>。
+          </div>
+        </section>
+
+        <div class="meta-row" style="margin-top: 2.5rem;">
+          <a class="btn btn-primary" href="/">回首頁</a>
+          <a class="btn btn-secondary" href="https://roz.gnjoy.com.tw/Notice/Notice_Info?id=217788" target="_blank" rel="noopener">查看官方公告</a>
+        </div>
+      </article>
+    </section>
+  </main>
+</BaseLayout>
