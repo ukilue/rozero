@@ -463,13 +463,10 @@ td {
     padding: 16px 0;
   }
 }
+
 .dropdown {
   position: relative;
   display: inline-block;
-}
-
-.dropdown-toggle {
-  cursor: pointer;
 }
 
 .dropdown-menu {
@@ -477,16 +474,29 @@ td {
   position: absolute;
   top: 100%;
   left: 0;
-  padding-top: 8px;  /* 加這行，讓選單往上延伸覆蓋空隙 */
+  margin: 0;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 4px 0;
   min-width: 120px;
   list-style: none;
-  margin: 4px 0 0 0;  /* ← 把這個 margin-top 改成 0 */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   z-index: 100;
+}
+
+/* 用偽元素填補觸發區和選單之間的空隙 */
+.dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 16px;   /* 視你的 gap 大小調整 */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 .dropdown-menu li a {
@@ -499,8 +509,4 @@ td {
 
 .dropdown-menu li a:hover {
   background-color: #f5f5f5;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
 }
