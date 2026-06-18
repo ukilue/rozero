@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../../layouts/baseLayout.astro';
+
+const hairInfo = {
+  name: "幸運髮飾",
+  tag: "頭盔（頭上）",
+  released: "2026/01",
+  desc: "以幸運之力編織而成的神秘髮飾，據說佩戴者能感受到幸運女神的眷顧。其最大特色在於擁有四格可自訂的「指定技能抗性」附魔欄位，讓玩家能針對特定職業技能進行傷害減免，是目前 ROZ 中唯一具備此功能的裝備。",
+  stats: [
+    { label: "系列",    value: "頭盔" },
+    { label: "裝備位置", value: "頭上" },
+    { label: "防禦力",   value: "0" },
+    { label: "重量",     value: "0" },
+    { label: "要求等級", value: "1" },
+    { label: "可裝備職業", value: "全職業" },
+    { label: "精煉",    value: "不可精煉" },
+    { label: "附魔格數", value: "4 格（指定技能抗性）" },
+  ],
+  officialLink: "https://roz.gnjoy.com.tw/Notice/Notice_Info?id=218112",
+  updateLink: "https://roz.gnjoy.com.tw/Notice/Notice_Info?id=218131",
+};
+
+const enchantSlots = [
+  { slot: 1, label: "第 1 格", effect: "指定技能抗性 −20%", note: "可選擇任一職業指定技能" },
+  { slot: 2, label: "第 2 格", effect: "指定技能抗性 −20%", note: "可選擇任一職業指定技能" },
+  { slot: 3, label: "第 3 格", effect: "指定技能抗性 −20%", note: "可選擇任一職業指定技能" },
+  { slot: 4, label: "第 4 格", effect: "指定技能抗性 −20%", note: "材料費用較高，為關鍵防禦格", highlight: true },
+];
+
+const enchantRules = [
+  "技能抗性採「加減算」計算，非乘算。例如：敵人技能增傷 +80%，玩家附魔 4 格（−80%），合計傷害為原始傷害 × 100%（不增傷也不減傷）。",
+  "四格全部附魔同一技能時，最大減傷上限為 −80%。",
+  "四格可混裝不同職業的技能抗性，但同一格僅能選定一種技能。",
+  "附魔後若欲更換技能種類，需重新附魔並消耗材料；請審慎選擇。",
+  "官方於 2026/01/20 公告確認抗性計算方式，並將每格效果由 −15% 調整為 −20%。",
+];
+
+const obtainMethods = [
+  {
+    icon: "",
+    title: "服飾蒐集狂活動",
+    desc: "透過限時「服飾蒐集狂」活動收集指定服飾，完成任務後取得「幸運代幣」。活動時間請關注官方公告。",
+  },
+  {
+    icon: "‍",
+    title: "NPC 歐夫萬 兌換",
+    desc: "持「幸運代幣」至 NPC 歐夫萬處進行兌換。每個角色可兌換「非歸屬版本」與「歸屬版本」各一件。",
+  },
+  {
+    icon: "",
+    title: "玩家間交易（非歸屬版）",
+    desc: "非歸屬版本可透過遊戲市集或玩家間交易取得。歸屬版本於兌換後即綁定角色，無法交易。",
+  },
+];
+
+const changeLog = [
+  { date: "2026/01/20", content: "官方公告確認技能抗性計算方式為加減算；每格抗性效果由 −15% 調整為 −20%。" },
+  { date: "2026/01/13", content: "幸運髮飾正式實裝，附魔系統同步開放，服飾蒐集狂活動同期啟動。" },
+];
+---
+
+<BaseLayout>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-box">
+        <div class="breadcrumb">
+          <span>首頁</span>
+          <span>/</span>
+          <span>裝備</span>
+          <span>/</span>
+          <span>幸運髮飾</span>
+        </div>
+        <h1 class="hero-title">幸運髮飾</h1>
+        <p class="hero-desc">
+          {hairInfo.desc}
+        </p>
+        <div class="meta-row">
+          <span class="tag">{hairInfo.tag}</span>
+          <span class="tag success">實裝時間：{hairInfo.released}</span>
+          <span class="tag warning">不可精煉</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <aside class="sidebar">
+        <h2 class="side-title">幸運髮飾導覽</h2>
+        <nav class="side-nav">
+          <a href="#overview" class="active">裝備說明</a>
+          <a href="#stats">基本資訊</a>
+          <a href="#enchant">附魔系統</a>
+          <a href="#obtain">取得方式</a>
+          <a href="#changelog">版本記錄</a>
+        </nav>
+      </aside>
+
+      <article class="content-panel">
+        <h1 class="page-title" id="overview">幸運髮飾</h1>
+        <p class="page-subtitle">
+          幸運髮飾是 ROZ 目前唯一具備「指定技能抗性」附魔功能的頭盔，透過活動取得後可自由附魔，
+          對 PvP 或高難度副本均有顯著的防禦價值。
+        </p>
+
+        <div class="notice">
+           本頁面資料依據官方公告及社群實測整理，詳細內容請以
+          <a href={hairInfo.officialLink} target="_blank" rel="noopener">官方公告</a>
+          及遊戲內說明為準。
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        {/* 基本資訊 */}
+        <section id="stats" style="margin-bottom: 2.5rem;">
+          <h2>基本資訊</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  <th>內容</th>
+                </tr>
+              </thead>
+              <tbody>
+                {hairInfo.stats.map((stat) => (
+                  <tr>
+                    <td><strong>{stat.label}</strong></td>
+                    <td>{stat.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        {/* 附魔系統 */}
+        <section id="enchant" style="margin-bottom: 2.5rem;">
+          <h2>指定技能抗性附魔系統</h2>
+          <div class="meta-row" style="margin-bottom: 1rem;">
+            <span class="tag">4 格附魔</span>
+            <span class="tag success">最高減傷 −80%</span>
+            <span class="tag warning">加減算計算</span>
+          </div>
+          <p>
+            幸運髮飾擁有 4 個附魔格，每格可指定特定職業的技能進行傷害抗性附魔。
+            四格全部附魔同一技能時，最多可減少該技能傷害 <strong>80%</strong>，
+            是目前對抗特定職業輸出的核心防具選擇。
+          </p>
+
+          <h3 style="margin-top: 1.5rem;">附魔格說明</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>附魔格</th>
+                  <th>效果</th>
+                  <th>備註</th>
+                </tr>
+              </thead>
+              <tbody>
+                {enchantSlots.map((s) => (
+                  <tr>
+                    <td>
+                      <strong style={s.highlight ? "color: #b45309;" : ""}>{s.label}</strong>
+                    </td>
+                    <td>
+                      <strong style="color: #16a34a;">{s.effect}</strong>
+                    </td>
+                    <td>
+                      <span style="font-size: 0.85em; color: #6b7280;">{s.note}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3 style="margin-top: 1.5rem;">附魔注意事項</h3>
+          <ul>
+            {enchantRules.map((rule) => (
+              <li>{rule}</li>
+            ))}
+          </ul>
+
+          <div class="notice" style="margin-top: 1rem; background: #fefce8; border-left-color: #ca8a04;">
+            ⚠️ 抗性計算方式已由官方於 2026/01/20 正式確認。
+            <a href={hairInfo.updateLink} target="_blank" rel="noopener">→ 查看官方公告</a>
+          </div>
+        </section>
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        {/* 取得方式 */}
+        <section id="obtain" style="margin-bottom: 2.5rem;">
+          <h2>取得方式</h2>
+          <div class="skill-list">
+            {obtainMethods.map((method) => (
+              <section class="skill-item">
+                <h3 class="skill-name">{method.icon} {method.title}</h3>
+                <p class="skill-text">{method.desc}</p>
+              </section>
+            ))}
+          </div>
+
+          <h3 style="margin-top: 1.5rem;">歸屬版本說明</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>版本</th>
+                  <th>取得上限</th>
+                  <th>交易</th>
+                  <th>說明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>非歸屬版</strong></td>
+                  <td>每角色 1 件</td>
+                  <td>可交易</td>
+                  <td><span style="font-size: 0.85em; color: #6b7280;">可於玩家市集買賣，或使用「服飾歸屬注入器」轉換為歸屬版</span></td>
+                </tr>
+                <tr>
+                  <td><strong>歸屬版</strong></td>
+                  <td>每角色 1 件</td>
+                  <td>不可交易</td>
+                  <td><span style="font-size: 0.85em; color: #b45309;">兌換後即綁定當前角色，可使用「服飾歸屬去除劑」轉回非歸屬版</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="notice" style="margin-top: 1rem;">
+             取得條件、活動期間及 NPC 位置詳情請參考
+            <a href={hairInfo.officialLink} target="_blank" rel="noopener">官方公告</a>。
+          </div>
+        </section>
+
+        <hr style="border: none; border-top: 1px solid var(--border, #e5e7eb); margin: 2rem 0;" />
+
+        {/* 版本更新記錄 */}
+        <section id="changelog" style="margin-bottom: 2.5rem;">
+          <h2>版本更新記錄</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>日期</th>
+                  <th>更新內容</th>
+                </tr>
+              </thead>
+              <tbody>
+                {changeLog.map((log) => (
+                  <tr>
+                    <td style="white-space: nowrap;"><strong>{log.date}</strong></td>
+                    <td>{log.content}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="meta-row" style="margin-top: 2.5rem;">
+          <a class="btn btn-primary" href="/">回首頁</a>
+          <a class="btn btn-secondary" href="/equipment">回裝備列表</a>
+          <a class="btn btn-secondary" href={hairInfo.officialLink} target="_blank" rel="noopener">查看官方公告</a>
+        </div>
+      </article>
+    </section>
+  </main>
+</BaseLayout>
