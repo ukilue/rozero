@@ -477,13 +477,14 @@ td {
   position: absolute;
   top: 100%;
   left: 0;
+  padding-top: 8px;  /* 加這行，讓選單往上延伸覆蓋空隙 */
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 4px 0;
   min-width: 120px;
   list-style: none;
-  margin: 4px 0 0 0;
+  margin: 4px 0 0 0;  /* ← 把這個 margin-top 改成 0 */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   z-index: 100;
 }
